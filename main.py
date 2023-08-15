@@ -30,6 +30,98 @@ def arithmetic_mean_filter(image, kernel_size=3):
     return filtered_image
 
 am = arithmetic_mean_filter(noisy_image)
+
+def geometric_mean_filter(image, kernel_size=3):
+    height, width,color = image.shape
+    filtered_image = np.zeros_like(image, dtype=np.uint8)
+    border = kernel_size//2
+    
+    for y in range(border, height - border):
+        for x in range(border, width - border):
+            window = image[y - border : y + border + 1, x - border : x + border + 1]
+            geometric_mean = np.prod(window)
+            filtered_image[y, x] = (geometric_mean**(1/(kernel_size**2))).astype(image.dtype)
+    return filtered_image
+
+gm = geometric_mean_filter(noisy_image)
+
+
+
+plt.imshow(gm)
+plt.show()
+
+
+# In[127]:
+
+
+def harmonic_mean_filter(image, kernel_size=3):
+    height, width,color = image.shape
+    filtered_image = np.zeros_like(image, dtype=np.uint8)
+    border = kernel_size//2
+    
+    for y in range(border, height - border):
+        for x in range(border, width - border):
+            window = image[y - border : y + border + 1, x - border : x + border + 1]
+            harmonic_mean = kernel_size**2 / np.sum(1.0 / (window + 1e-6))
+            filtered_image[y, x] = (harmonic_mean).astype(image.dtype)
+    return filtered_image
+
+
+# In[128]:
+
+
+hm = harmonic_mean_filter(noisy_image)
+
+
+# In[129]:
+
+
+plt.imshow(hm)
+plt.show()
+
+
+# In[163]:
+
+
+def counter_harmonic_mean_filter(image, kernel_size=3, Q=1.5):
+    height, width,color = image.shape
+    filtered_image = np.zeros_like(image, dtype=np.uint8)
+    border = kernel_size//2
+    
+    for y in range(border, height - border):
+        for x in range(border, width - border):
+            window = image[y - border : y + border + 1, x - border : x + border + 1]
+            numerator = np.sum(np.power(window, Q+1))
+            denominator = np.sum(np.power(window, Q))
+            
+            if denominator != 0:
+                counter_harmonic_mean = numerator / denominator
+            else:
+                counter_harmonic_mean = 0
+                
+            filtered_image[y, x] = (counter_harmonic_mean).astype(image.dtype)
+    return filtered_image
+
+
+# In[164]:
+
+
+chm = counter_harmonic_mean_filter(noisy_image)
+
+
+# In[165]:
+
+
+plt.imshow(chm)
+plt.show()
+
+
+# In[ ]:
+
+
+
+
+
 plt.imshow(am)
 plt.show()
 
