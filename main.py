@@ -44,15 +44,8 @@ def geometric_mean_filter(image, kernel_size=3):
     return filtered_image
 
 gm = geometric_mean_filter(noisy_image)
-
-
-
 plt.imshow(gm)
 plt.show()
-
-
-# In[127]:
-
 
 def harmonic_mean_filter(image, kernel_size=3):
     height, width,color = image.shape
@@ -66,22 +59,9 @@ def harmonic_mean_filter(image, kernel_size=3):
             filtered_image[y, x] = (harmonic_mean).astype(image.dtype)
     return filtered_image
 
-
-# In[128]:
-
-
 hm = harmonic_mean_filter(noisy_image)
-
-
-# In[129]:
-
-
 plt.imshow(hm)
 plt.show()
-
-
-# In[163]:
-
 
 def counter_harmonic_mean_filter(image, kernel_size=3, Q=1.5):
     height, width,color = image.shape
@@ -102,27 +82,7 @@ def counter_harmonic_mean_filter(image, kernel_size=3, Q=1.5):
             filtered_image[y, x] = (counter_harmonic_mean).astype(image.dtype)
     return filtered_image
 
-
-# In[164]:
-
-
 chm = counter_harmonic_mean_filter(noisy_image)
-
-
-# In[165]:
-
-
 plt.imshow(chm)
 plt.show()
-
-
-# In[ ]:
-
-
-
-
-
-plt.imshow(am)
-plt.show()
-
 
