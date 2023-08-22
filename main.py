@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-image=cv2.imread("image.jpg") #insert your image here
+image=cv2.imread("image.jpg") #insert your "grayscale" image here
 #img = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 plt.imshow(image)
 plt.show()
